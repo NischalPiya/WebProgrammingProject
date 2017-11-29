@@ -32,19 +32,25 @@ def list_assignment(course_code):
         base_url = 'https://canvas.moravian.edu/api/v1/users/self/courses/'+course_code+'/assignments'
         headers = {"Authorization": "Bearer " + canvas_api}
         response = requests.get(base_url, headers=headers)
-        print(response)
+
         if response.status_code == 404:
             print("Please enter a valid 4-digit class code")
-        if response.status_code == 401:
+        elif response.status_code == 401:
             print("Status code entered is not a class you are authorized to access")
         else:
             response.raise_for_status()
             data= json.loads(response.text)
             for homework in data :
                 if homework['due_at']!='None':
-                    print(homework['name'],homework['assignment_group_id'],homework['due_at'])
+                    print(homework['name'],homework['id'],homework['due_at'])
             return data
-(list_assignment("1"))
+
+
+
+def add_assignment(assign_id):
+    return 0
+
+(list_assignment("5522"))
 
 
 
