@@ -4,7 +4,7 @@ import redis
 
 from Server import list_assignment
 
-class TestGetAssignments(TestCase):
+class TestListAssignments(TestCase):
 
     def test_assignments_valid_class_code(self):
         assign = list_assignment("5522")
