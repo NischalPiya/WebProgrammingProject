@@ -54,7 +54,15 @@ def get_due_date(course_code,assign_id):
     data = json.loads(response.text)
     return (data['due_at'])
 
+def get_assign_name(course_code,assign_id):
+    base_url = 'https://canvas.moravian.edu/api/v1/courses/' + course_code + '/assignments/' + assign_id
+    headers = {"Authorization": "Bearer " + canvas_api}
+    response = requests.get(base_url, headers=headers)
+    response.raise_for_status()
+    data = json.loads(response.text)
+    return (data['name'])
 
 def add_assignment(assign_id):
     return 0
 
+list_assignment("5522")
