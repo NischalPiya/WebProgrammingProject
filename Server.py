@@ -2,11 +2,11 @@ from flask import Flask, jsonify
 import requests
 import os
 import json
+import time
 
 
 app= Flask(__name__)
 
-import time
 
 canvas_api=os.environ['CANVAS_KEY']
 
@@ -32,6 +32,7 @@ def list_assignment(course_code):
         base_url = 'https://canvas.moravian.edu/api/v1/users/self/courses/'+course_code+'/assignments'
         headers = {"Authorization": "Bearer " + canvas_api}
         response = requests.get(base_url, headers=headers)
+
         if response.status_code == 404:
             print("Please enter a valid 4-digit class code")
         elif response.status_code == 401:
@@ -52,13 +53,8 @@ def get_due_date(course_code,assign_id):
     data = json.loads(response.text)
     return (data['due_at'])
 
-get_due_date("5522","25628")
 
 def add_assignment(assign_id):
     return 0
 
-(list_assignment("5522"))
-
-
-
-
+list_assignment('5522')
