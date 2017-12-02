@@ -45,6 +45,7 @@ def list_assignment(course_code):
                     print(homework['name'],homework['id'],homework['due_at'])
             return data
 
+
 def get_due_date(course_code,assign_id):
     base_url = 'https://canvas.moravian.edu/api/v1/courses/' + course_code + '/assignments/' + assign_id
     headers = {"Authorization": "Bearer " + canvas_api}
@@ -57,4 +58,3 @@ def get_due_date(course_code,assign_id):
 def add_assignment(assign_id):
     return 0
 
-list_assignment('5522')
