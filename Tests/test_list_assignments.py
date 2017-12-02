@@ -15,5 +15,6 @@ class TestListAssignments(TestCase):
         self.assertEqual(None,assign)
 
 
+
 if __name__ == '__main__':
     unittest.main()
