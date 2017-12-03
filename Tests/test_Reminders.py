@@ -16,7 +16,6 @@ class TestListAssignments(TestCase):
         r = Reminders({})
         r.new_canvas_reminder("5522","27201")
         r.new_canvas_reminder("5522","25628")
-        r.list_reminders()
         self.assertEqual(2, len(r.get_product_list()))
 
     def test_delete_inventory(self):
