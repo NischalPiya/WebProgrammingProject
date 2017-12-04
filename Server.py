@@ -3,6 +3,7 @@ import requests
 import os
 import json
 import time
+import datetime
 
 
 app= Flask(__name__)
@@ -21,10 +22,13 @@ def list_courses():
     response = requests.get(base_url, headers=headers)
     response.raise_for_status()
     data = json.loads(response.text)
-    print(data)
+    curr_date = datetime.datetime.strptime(datetime.datetime.today().strftime('%Y-%m-%d'),'%Y-%m-%d')
+    print(curr_date)
     for courses in data:
-        print(courses['name'],courses['id'])
-    return courses['name'],courses['id']
+        end_date = datetime.datetime.strptime(courses['end_at'][0:10], '%Y-%m-%d')
+        if end_date > curr_date:
+            print(courses['name'],courses['id'])
+
 
 @app.route('/list/<course_code>')
 def list_assignment(course_code):
