@@ -12,22 +12,21 @@ canvas_api=os.environ['CANVAS_KEY']
 
 @app.route('/')
 def index():
+    return("hello")
 
-        base_url='https://canvas.moravian.edu/api/v1/users/self/courses/5522/assignments'
-        headers = {"Authorization": "Bearer " + canvas_api}
-        r= requests.get(base_url,headers=headers)
-        data= r.json()
+@app.route('/courses')
+def list_courses():
+    base_url = 'https://canvas.moravian.edu/api/v1/courses/'
+    headers = {"Authorization": "Bearer " + canvas_api}
+    response = requests.get(base_url, headers=headers)
+    response.raise_for_status()
+    data = json.loads(response.text)
+    print(data)
+    for courses in data:
+        print(courses['name'],courses['id'])
+    return courses['name'],courses['id']
 
-        return jsonify(data)
-
-
-if __name__=='__main__':
-
-    app.run(debug=True)
-
-
-
-
+@app.route('/list/<course_code>')
 def list_assignment(course_code):
         base_url = 'https://canvas.moravian.edu/api/v1/users/self/courses/'+course_code+'/assignments'
         headers = {"Authorization": "Bearer " + canvas_api}
@@ -65,4 +64,6 @@ def get_assign_name(course_code,assign_id):
 def add_assignment(assign_id):
     return 0
 
-list_assignment("5522")
+
+if __name__=='__main__':
+    app.run(debug=True)
