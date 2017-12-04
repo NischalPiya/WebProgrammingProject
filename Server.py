@@ -17,7 +17,7 @@ def index():
 
 @app.route('/courses')
 def list_courses():
-    base_url = 'https://canvas.moravian.edu/api/v1/courses/'
+    base_url = 'https://canvas.moravian.edu/api/v1/courses/?per_page=50'
     headers = {"Authorization": "Bearer " + canvas_api}
     response = requests.get(base_url, headers=headers)
     response.raise_for_status()
