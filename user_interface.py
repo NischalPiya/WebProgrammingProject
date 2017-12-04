@@ -1,11 +1,27 @@
-from Reminders import Reminders
+from Reminders import Reminders,r
 from Server import list_courses, list_assignment
-
+import time
 print("Canvas Reminders Application")
-print("What would you like to do?")
-print("1. List all of your courses")
 
-user_response = input("Print the number of the action you would like to perform: ")
+user_response = " "
+while True:
+    while(user_response != "0"):
+        print("\nWhat would you like to do?")
+        print("1. List all of your courses")
+        print("2. List all assignments for a specific course")
+        print("3. Add a new reminder")
+        user_response = input("Print the number of the action you would like to perform: ")
 
-if user_response == "1":
-    print(list_courses())
+        if user_response == "1":
+            list_courses()
+        if user_response == "2":
+            course_code = input("\nEnter the course code for the class: ")
+            list_assignment(course_code)
+        if user_response == "3":
+            course_code = input("\nEnter the course code for the class: ")
+            assign_id = input("\nEnter the assignment code for the class: ")
+            r.new_canvas_reminder(course_code,assign_id)
+            print(r.list_reminders())
+        time.sleep(3.0)
+
+    break

@@ -23,7 +23,7 @@ def list_courses():
     response.raise_for_status()
     data = json.loads(response.text)
     curr_date = datetime.datetime.strptime(datetime.datetime.today().strftime('%Y-%m-%d'),'%Y-%m-%d')
-    print(curr_date)
+    print("Current course as of " + str(curr_date) + "\n")
     for courses in data:
         end_date = datetime.datetime.strptime(courses['end_at'][0:10], '%Y-%m-%d')
         if end_date > curr_date:
@@ -44,7 +44,7 @@ def list_assignment(course_code):
             response.raise_for_status()
             data= json.loads(response.text)
             for homework in data :
-                if homework['due_at']!='None':
+                if homework['due_at']!= None:
                     print(homework['name'],homework['id'],homework['due_at'])
             return data
 

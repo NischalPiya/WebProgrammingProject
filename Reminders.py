@@ -10,7 +10,8 @@ class Reminders():
     def new_canvas_reminder(self,course_code,assign_id):
         if self.r.get(assign_id) != self.r.keys():
             self.r.set(get_assign_name(course_code,assign_id), get_due_date(course_code,assign_id))
-
+        else:
+            print("This assignment already has a reminder.")
     def new_user_reminder(self,assignment_name,class_name,due_date):
         self.r.set(assignment_name,due_date)
 

@@ -6,6 +6,7 @@ def create_test_db():
     test = redis.Redis()
     test.flushdb()
     return Reminders(test)
+
 class TestReminders(TestCase):
     def test_new_empty_inventory(self):
         r = create_test_db()
