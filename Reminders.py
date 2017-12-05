@@ -20,12 +20,25 @@ class Reminders():
         self.r.delete(get_assign_name(course_code,assign_id))
 
 
+
+
     def list_reminders(self):
-        print(self.r.keys())
+        list = []
+        for ass in self.r.keys():
+            real_ass = ass.decode()
+            list.append(real_ass)
+        return list
+
+
+
 
     def get_product_list(self):
         return self.r.keys()
 
 r=Reminders({})
 r.new_canvas_reminder('5522','27201')
-print(r.list_reminders())
+r.new_canvas_reminder('5522','28973')
+
+
+
+

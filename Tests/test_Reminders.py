@@ -37,3 +37,8 @@ class TestReminders(TestCase):
 
     def test_list_reminders(self):
         return 0
+
+    def test_delete_empty_reminder(self):
+        r=create_test_db()
+        r.delete_canvas_reminder('5522','27201')
+        self.assertEqual([],r.list_reminders(),'You have no reminders to delete')

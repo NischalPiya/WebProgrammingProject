@@ -2,7 +2,6 @@ from flask import Flask, jsonify
 import requests
 import os
 import json
-import time
 import datetime
 
 
@@ -71,3 +70,4 @@ def add_assignment(assign_id):
 
 if __name__=='__main__':
     app.run(debug=True)
+
