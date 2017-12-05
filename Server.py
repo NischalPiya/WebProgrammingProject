@@ -34,7 +34,7 @@ def list_assignment(course_code):
         base_url = 'https://canvas.moravian.edu/api/v1/users/self/courses/'+course_code+'/assignments'
         headers = {"Authorization": "Bearer " + canvas_api}
         response = requests.get(base_url, headers=headers)
-
+        curr_date = datetime.datetime.strptime(datetime.datetime.today().strftime('%Y-%m-%d'),'%Y-%m-%d')
         if response.status_code == 404:
             print("Please enter a valid 4-digit class code")
         elif response.status_code == 401:
@@ -43,8 +43,10 @@ def list_assignment(course_code):
             response.raise_for_status()
             data= json.loads(response.text)
             for homework in data :
-                if homework['due_at']!= None:
-                    print(homework['name'],homework['id'],homework['due_at'])
+                if homework['due_at'] != None:
+                    end_date = datetime.datetime.strptime(homework['due_at'][0:10], '%Y-%m-%d')
+                    if  end_date > curr_date:
+                        print(homework['name'],homework['id'],homework['due_at'])
             return data
 
 
