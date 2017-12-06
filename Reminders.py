@@ -1,11 +1,17 @@
 import redis
-from Server import get_due_date,get_assign_name,list_assignment,get_course_id_assign_id_with_name
+import requests
+import json
+import os
+
+canvas_api = os.environ['CANVAS_KEY']
 
 
 class Reminders():
 
     def __init__(self,existing_reminders):
         self.r = redis.Redis()
+
+
 
     def new_canvas_reminder(self,course_code,assign_id):
         if len(course_code) == 4 and course_code.isdigit():
@@ -43,6 +49,21 @@ class Reminders():
         self.r.flushdb()
 
 
+def get_due_date(course_code, assign_id):
+    base_url = 'https://canvas.moravian.edu/api/v1/courses/' + course_code + '/assignments/' + assign_id
+    headers = {"Authorization": "Bearer " + canvas_api}
+    response = requests.get(base_url, headers=headers)
+    response.raise_for_status()
+    data = json.loads(response.text)
+    return (data['due_at'])
+
+def get_assign_name(course_code, assign_id):
+    base_url = 'https://canvas.moravian.edu/api/v1/courses/' + course_code + '/assignments/' + assign_id
+    headers = {"Authorization": "Bearer " + canvas_api}
+    response = requests.get(base_url, headers=headers)
+    response.raise_for_status()
+    data = json.loads(response.text)
+    return (data['name'])
 
 
 r=Reminders({})

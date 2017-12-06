@@ -4,7 +4,7 @@ import os
 import json
 import datetime
 app= Flask(__name__)
-
+from Reminders import Reminders
 
 canvas_api=os.environ['CANVAS_KEY']
 
@@ -49,21 +49,7 @@ def list_assignment(course_code):
             return data
 
 
-def get_due_date(course_code,assign_id):
-    base_url = 'https://canvas.moravian.edu/api/v1/courses/' + course_code + '/assignments/' + assign_id
-    headers = {"Authorization": "Bearer " + canvas_api}
-    response = requests.get(base_url, headers=headers)
-    response.raise_for_status()
-    data = json.loads(response.text)
-    return (data['due_at'])
 
-def get_assign_name(course_code,assign_id):
-    base_url = 'https://canvas.moravian.edu/api/v1/courses/' + course_code + '/assignments/' + assign_id
-    headers = {"Authorization": "Bearer " + canvas_api}
-    response = requests.get(base_url, headers=headers)
-    response.raise_for_status()
-    data = json.loads(response.text)
-    return (data['name'])
 
 
 def get_course_id_assign_id_with_name(course_code,assignment_name):
