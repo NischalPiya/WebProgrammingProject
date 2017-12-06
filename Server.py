@@ -3,7 +3,7 @@ import requests
 import os
 import json
 import datetime
-
+import redis
 
 app= Flask(__name__)
 
@@ -68,7 +68,6 @@ def get_assign_name(course_code,assign_id):
 
 def add_assignment(assign_id):
     return 0
-
 
 if __name__=='__main__':
     app.run(debug=True)

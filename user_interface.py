@@ -15,6 +15,7 @@ while True:
         print("4. Remove a reminder")
         print("5. List all my reminders")
         print("6. Delete all my reminders")
+        print("7. Edit time to send reminders")
         print("7. Quit")
         print("")
         user_response = input("Print the number of the action you would like to perform: ")
