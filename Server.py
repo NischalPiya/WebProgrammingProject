@@ -3,7 +3,6 @@ import requests
 import os
 import json
 import datetime
-import redis
 
 app= Flask(__name__)
 
@@ -12,11 +11,12 @@ canvas_api=os.environ['CANVAS_KEY']
 
 @app.route('/')
 def index():
+
     return("hello")
 
 @app.route('/courses')
 def list_courses():
-    base_url = 'https://canvas.moravian.edu/api/v1/courses/?per_page=50'
+    base_url = 'https://canvas.moravian.edu/api/v1/courses/?per_page=200'
     headers = {"Authorization": "Bearer " + canvas_api}
     response = requests.get(base_url, headers=headers)
     response.raise_for_status()
@@ -31,7 +31,7 @@ def list_courses():
 
 @app.route('/list/<course_code>')
 def list_assignment(course_code):
-        base_url = 'https://canvas.moravian.edu/api/v1/users/self/courses/'+course_code+'/assignments'
+        base_url = 'https://canvas.moravian.edu/api/v1/users/self/courses/'+course_code+'/assignments/?per_page=200'
         headers = {"Authorization": "Bearer " + canvas_api}
         response = requests.get(base_url, headers=headers)
         #curr_date = datetime.datetime.strptime(datetime.datetime.today().strftime('%Y-%m-%d'),'%Y-%m-%d')
@@ -66,9 +66,24 @@ def get_assign_name(course_code,assign_id):
     data = json.loads(response.text)
     return (data['name'])
 
-def add_assignment(assign_id):
-    return 0
+
+def get_course_id_assign_id_with_name(course_code,assignment_name):
+    base_url = 'https://canvas.moravian.edu/api/v1/courses/' + course_code + '/assignments/'
+    headers = {"Authorization": "Bearer " + canvas_api}
+    response = requests.get(base_url, headers=headers)
+    response.raise_for_status()
+    data = json.loads(response.text)
+    for homework in data:
+
+        if(assignment_name==homework['name']):
+            print (homework['course_id'],homework['id'])
+    return data
 
 if __name__=='__main__':
     app.run(debug=True)
+
+
+
+
+
 

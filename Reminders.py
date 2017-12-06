@@ -1,6 +1,6 @@
 import redis
-import threading
-from Server import get_due_date,get_assign_name,list_assignment
+from Server import get_due_date,get_assign_name,list_assignment,get_course_id_assign_id_with_name
+
 
 class Reminders():
 
@@ -23,13 +23,19 @@ class Reminders():
 
     def delete_canvas_reminder(self,course_code,assign_id):
         self.r.delete(get_assign_name(course_code,assign_id))
+        if r.list_reminders()==[]:
+            print('You have no reminders to delete')
 
     def list_reminders(self):
         list = []
         for assign in self.r.keys():
+
             real_assign = assign.decode()
-            list.append(real_assign)
+
+            list.append(real_assign+str(self.r.get(real_assign)))
+
         return list
+
 
     def get_product_list(self):
         return self.r.keys()
@@ -37,4 +43,11 @@ class Reminders():
     def delete_all_reminders(self):
         self.r.flushdb()
 
-r = Reminders({})
+
+
+
+r=Reminders({})
+
+
+
+

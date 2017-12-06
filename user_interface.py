@@ -10,7 +10,7 @@ while True:
     while(user_response != "8"):
         print("\nWhat would you like to do?")
         print("1. List all of your courses")
-        print("2. List all assignments for a specific course")
+        print("2. List all assignments for a specific course (Upcoming Assignments)")
         print("3. Add a new reminder")
         print("4. Remove a reminder")
         print("5. List all my reminders")
@@ -47,6 +47,7 @@ while True:
             r.list_reminders()
 
             print("->" + str(r.list_reminders()).strip('[]'))
+
         elif user_response == "6":
             r.delete_all_reminders()
         elif user_response == "7":
