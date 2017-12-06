@@ -8,8 +8,8 @@ class Reminders():
         self.r = redis.Redis()
 
     def new_canvas_reminder(self,course_code,assign_id):
-        if len(course_code) == 4 & course_code.isdigit():
-            if len(assign_id) == 5 & assign_id.isdigit():
+        if len(course_code) == 4 and course_code.isdigit():
+            if len(assign_id) == 5 and assign_id.isdigit():
                 if self.r.exists(get_assign_name(course_code,assign_id)) == 0:
                     self.r.set(get_assign_name(course_code,assign_id), get_due_date(course_code,assign_id))
                     return 1
@@ -31,8 +31,7 @@ class Reminders():
         for assign in self.r.keys():
 
             real_assign = assign.decode()
-
-            list.append(real_assign+str(self.r.get(real_assign)))
+            list.append(real_assign+" "+str(self.r.get(real_assign))[2:12])
 
         return list
 

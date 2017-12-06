@@ -38,9 +38,11 @@ while True:
             new_list = []
             course_code = input("\nEnter the course code for the class: ")
             assign_id = input("\nEnter the assignment code for the class: ")
-            r.delete_canvas_reminder(course_code, assign_id)
+            checker = 0
 
-            print("->"+str(r.list_reminders()).strip('[]'))
+            checker = r.delete_canvas_reminder(course_code, assign_id)
+            if checker == 1:
+                print("->"+str(r.list_reminders()).strip('[]'))
 
         elif user_response == "5":
             new_list = []
