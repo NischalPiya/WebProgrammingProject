@@ -1,8 +1,7 @@
 from flask import Flask
-import requests
 import os
-import json
-import datetime
+import time
+
 app= Flask(__name__)
 from Reminders import r,list_courses,list_assignment
 from Phone_sms import phone_sms
@@ -19,7 +18,11 @@ def course_list():
 
 @app.route('/send_sms')
 def send_text():
-    return phone_sms()
+    while True:
+        phone_sms()
+        time.sleep(6)
+        break
+    return("Message has been sent")
 @app.route('/list/<course_code>')
 def assignment_list():
     return list_assignment("<course_code>")

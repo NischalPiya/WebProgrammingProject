@@ -6,12 +6,9 @@ start_time=time.time()
 
 
 def phone_sms():
-    while True:
-        client = Client(account_ssid, auth_token)
-        message = client.messages.create(to=my_phone_number,from_=twilio_phone_number,body="You have "+str(r.list_reminders()).strip('[]'))
-        print(message.sid)
+    client = Client(account_ssid, auth_token)
+    message = client.messages.create(to=my_phone_number,from_=twilio_phone_number,body="You have "+str(r.list_reminders()).strip('[]'))
+    print(message.sid)
 
 
-        time.sleep(10)
 
-phone_sms()
