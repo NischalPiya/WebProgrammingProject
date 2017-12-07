@@ -1,5 +1,7 @@
 from Reminders import r,list_courses,list_assignment
 import time
+
+
 print("")
 print("      *** Canvas Reminders Application ***")
 

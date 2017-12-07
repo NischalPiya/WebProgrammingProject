@@ -5,7 +5,7 @@ import json
 import datetime
 app= Flask(__name__)
 from Reminders import r,list_courses,list_assignment
-
+from Phone_sms import phone_sms
 canvas_api=os.environ['CANVAS_KEY']
 
 
@@ -17,7 +17,9 @@ def index():
 def course_list():
     return list_courses()
 
-
+@app.route('/send_sms')
+def send_text():
+    return phone_sms()
 @app.route('/list/<course_code>')
 def assignment_list():
     return list_assignment("<course_code>")

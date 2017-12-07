@@ -2,6 +2,7 @@ import unittest
 from unittest import TestCase
 from Reminders import Reminders
 import redis
+
 def create_test_db():
     test = redis.Redis()
     test.flushdb()
