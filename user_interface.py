@@ -1,4 +1,5 @@
-from Reminders import Reminders,r
+from Server import r
+import Reminders
 from Server import list_courses, list_assignment
 import time
 print("")

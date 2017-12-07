@@ -7,12 +7,13 @@ app= Flask(__name__)
 from Reminders import Reminders
 
 canvas_api=os.environ['CANVAS_KEY']
+r = Reminders({})
+
 
 @app.route('/')
 def index():
-
-    return("hello")
-
+    list = r.list_reminders()
+    return str(list)
 @app.route('/courses')
 def list_courses():
     base_url = 'https://canvas.moravian.edu/api/v1/courses/?per_page=200'

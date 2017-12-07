@@ -66,7 +66,6 @@ def get_assign_name(course_code, assign_id):
     return (data['name'])
 
 
-r=Reminders({})
 
 
 
