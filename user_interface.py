@@ -8,7 +8,7 @@ print("      *** Canvas Reminders Application ***")
 user_response = " "
 while True:
 
-    while(user_response != "8"):
+    while(user_response != "7"):
         print("\nWhat would you like to do?")
         print("1. List all of your courses")
         print("2. List all assignments for a specific course (Upcoming Assignments)")
@@ -16,8 +16,7 @@ while True:
         print("4. Remove a reminder")
         print("5. List all my reminders")
         print("6. Delete all my reminders")
-        print("7. Edit time to send reminders")
-        print("8. Quit")
+        print("7. Quit")
         print("")
         user_response = input("Print the number of the action you would like to perform: ")
 
@@ -53,9 +52,8 @@ while True:
 
         elif user_response == "6":
             r.delete_all_reminders()
-        elif user_response == "7":
-            print("WIP")
-        elif user_response=="8":
+
+        elif user_response=="7":
             break
         else:
             print("Enter a valid number")
