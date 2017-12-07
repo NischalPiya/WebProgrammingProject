@@ -1,6 +1,4 @@
-from Reminders import r
-import Reminders
-from Server import list_courses, list_assignment
+from Reminders import r,list_courses,list_assignment
 import time
 print("")
 print("      *** Canvas Reminders Application ***")
