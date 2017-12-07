@@ -12,19 +12,23 @@ canvas_api=os.environ['CANVAS_KEY']
 def index():
     return "This is your Canvas Reminder"
 
-@app.route('/assignment')
-def assignment():
-    list = r.list_reminders()
-    return str(list)
-
 @app.route('/courses')
 def course_list():
-    return list_courses()
+    data = list_courses()
+    return data
 
-@app.route('/send_sms/<time>')
-def send_text(time):
+@app.route('/assignments')
+def assignment():
+    print()
+    list = r.list_reminders()
+    return "These are the assignments you currently have reminders for: " + str(list)
+
+
+
+@app.route('/send_sms/<set_time>')
+def send_text(set_time):
     while True:
-        time.sleep()
+        time.sleep(set_time)
         phone_sms()
         break
     return("Message has been sent")

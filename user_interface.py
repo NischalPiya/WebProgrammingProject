@@ -11,7 +11,7 @@ while True:
     while(user_response != "7"):
         print("\nWhat would you like to do?")
         print("1. List all of your courses")
-        print("2. List all assignments for a specific course (Upcoming Assignments)")
+        print("2. List all assignments for a specific course")
         print("3. Add a new reminder")
         print("4. Remove a reminder")
         print("5. List all my reminders")
@@ -39,7 +39,6 @@ while True:
             course_code = input("\nEnter the course code for the class: ")
             assign_id = input("\nEnter the assignment code for the class: ")
             checker = 0
-
             checker = r.delete_canvas_reminder(course_code, assign_id)
             if checker == 1:
                 print("->"+str(r.list_reminders()).strip('[]'))
@@ -47,7 +46,6 @@ while True:
         elif user_response == "5":
             new_list = []
             r.list_reminders()
-
             print("->" + str(r.list_reminders()).strip('[]'))
 
         elif user_response == "6":
