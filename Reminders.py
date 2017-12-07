@@ -37,7 +37,7 @@ class Reminders():
         for assign in self.r.keys():
 
             real_assign = assign.decode()
-            list.append(real_assign+" "+str(self.r.get(real_assign))[2:12])
+            list.append(real_assign+" due at "+str(self.r.get(real_assign))[2:21])
 
         return list
 
@@ -46,7 +46,10 @@ class Reminders():
         return self.r.keys()
 
     def delete_all_reminders(self):
-        self.r.flushdb()
+        if r.list_reminders()==[]:
+            print('You have no reminders to delete')
+        else:
+            self.r.flushdb()
 
 
 def get_due_date(course_code, assign_id):
@@ -76,13 +79,15 @@ def list_courses():
     for courses in data:
         end_date = datetime.datetime.strptime(courses['end_at'][0:10], '%Y-%m-%d')
         if end_date > curr_date:
-            print(courses['name'],courses['id'])
+            list.append(courses['name'],courses['id'])
+
+    return list
 
 def list_assignment(course_code):
     base_url = 'https://canvas.moravian.edu/api/v1/users/self/courses/' + course_code + '/assignments/?per_page=200'
     headers = {"Authorization": "Bearer " + canvas_api}
     response = requests.get(base_url, headers=headers)
-    # curr_date = datetime.datetime.strptime(datetime.datetime.today().strftime('%Y-%m-%d'),'%Y-%m-%d')
+    curr_date = datetime.datetime.strptime(datetime.datetime.today().strftime('%Y-%m-%d'),'%Y-%m-%d')
     if response.status_code == 404:
         print("Please enter a valid 4-digit class code")
     elif response.status_code == 401:
@@ -92,9 +97,9 @@ def list_assignment(course_code):
         data = json.loads(response.text)
         for homework in data:
             if homework['due_at'] != None:
-                # end_date = datetime.datetime.strptime(homework['due_at'][0:10], '%Y-%m-%d')
-                # if  end_date > curr_date:
-                print(homework['name'], homework['id'], homework['due_at'])
+                end_date = datetime.datetime.strptime(homework['due_at'][0:10], '%Y-%m-%d')
+                if  end_date > curr_date:
+                    print(homework['name'], homework['id'], homework['due_at'])
         return data
 r = Reminders({})
 

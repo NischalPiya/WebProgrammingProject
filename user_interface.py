@@ -1,7 +1,10 @@
 from Reminders import r,list_courses,list_assignment
 import time
 
+import time
+import datetime
 
+print ("                                              Current date and time: " , datetime.datetime.now())
 print("")
 print("      *** Canvas Reminders Application ***")
 
@@ -51,7 +54,17 @@ while True:
             print("->" + str(r.list_reminders()).strip('[]'))
 
         elif user_response == "6":
-            r.delete_all_reminders()
+            confirm=input("\nAre you sure you want to remove(Y/N)?")
+            if(confirm=="y" or confirm=="Y"):
+                r.delete_all_reminders()
+            else:
+                r.list_reminders()
+
+                print("->" + str(r.list_reminders()).strip('[]'))
+
+
+
+
 
         elif user_response=="7":
             break

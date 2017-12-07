@@ -1,8 +1,13 @@
 from twilio.rest import Client
-from credentials import account_ssid,auth_token,my_phone_number,twilio_phone_number
 from Reminders import r
+import os
 import time
 start_time=time.time()
+
+account_ssid= os.environ['ACCOUNT_SSID']
+auth_token=os.environ['ACCOUNT_TOKEN']
+my_phone_number=os.environ['MY_PHONE_NUMBER']
+twilio_phone_number=os.environ['TWILIO_PHONE_NUMBER']
 
 
 def phone_sms():

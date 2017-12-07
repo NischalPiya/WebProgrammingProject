@@ -1,4 +1,3 @@
-import unittest
 from unittest import TestCase
 from Reminders import Reminders
 import redis
@@ -43,3 +42,6 @@ class TestReminders(TestCase):
         r=create_test_db()
         r.delete_canvas_reminder('5522','27201')
         self.assertEqual([],r.list_reminders(),'You have no reminders to delete')
+
+
+
