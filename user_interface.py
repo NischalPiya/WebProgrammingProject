@@ -1,4 +1,4 @@
-from Server import r
+from Reminders import r
 import Reminders
 from Server import list_courses, list_assignment
 import time

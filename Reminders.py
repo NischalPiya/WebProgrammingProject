@@ -65,8 +65,7 @@ def get_assign_name(course_code, assign_id):
     data = json.loads(response.text)
     return (data['name'])
 
-
-
+r = Reminders({})
 
 
 

@@ -7,7 +7,6 @@ app= Flask(__name__)
 from Reminders import Reminders
 
 canvas_api=os.environ['CANVAS_KEY']
-r = Reminders({})
 
 
 @app.route('/')
@@ -48,22 +47,6 @@ def list_assignment(course_code):
                     #if  end_date > curr_date:
                     print(homework['name'],homework['id'],homework['due_at'])
             return data
-
-
-
-
-
-def get_course_id_assign_id_with_name(course_code,assignment_name):
-    base_url = 'https://canvas.moravian.edu/api/v1/courses/' + course_code + '/assignments/'
-    headers = {"Authorization": "Bearer " + canvas_api}
-    response = requests.get(base_url, headers=headers)
-    response.raise_for_status()
-    data = json.loads(response.text)
-    for homework in data:
-
-        if(assignment_name==homework['name']):
-            print (homework['course_id'],homework['id'])
-    return data
 
 if __name__=='__main__':
     app.run(debug=True)
