@@ -25,7 +25,7 @@ def assignment():
 
 
 
-@app.route('/send_sms/<set_time>')
+@app.route('/send_sms/<int:set_time>')
 def send_text(set_time):
     while True:
         time.sleep(set_time)
