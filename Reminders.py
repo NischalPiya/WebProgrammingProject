@@ -17,12 +17,14 @@ class Reminders():
                         return 1
                     else:
                         print("This assignment already has a reminder.")
+                        return 2
 
-                return 0
             else:
                 print("Enter a valid assignment id")
+                return 0
         else:
             print("Enter a valid course code.")
+            return 0
 
     def delete_canvas_reminder(self,course_code,assign_id):
         if len(course_code) == 4 and course_code.isdigit():
@@ -33,11 +35,13 @@ class Reminders():
                         return 1
                     else:
                         print('This assignment currently has no reminder')
-                        return 0
+                        return 2
             else:
                 print("Enter a valid assignment id")
+                return 0
         else:
             print("Enter a valid course code.")
+            return 0
 
     def list_reminders(self):
         list = []

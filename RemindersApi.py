@@ -45,7 +45,7 @@ def list_courses():
         end_date = datetime.datetime.strptime(courses['end_at'][0:10], '%Y-%m-%d')
         if end_date > curr_date:
             print(courses['name'],courses['id'])
-
+    return data
 
 def list_assignment(course_code):
     base_url = 'https://canvas.moravian.edu/api/v1/users/self/courses/' + course_code + '/assignments/?per_page=200'

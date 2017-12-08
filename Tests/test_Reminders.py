@@ -30,7 +30,7 @@ class TestReminders(TestCase):
         test.delete_canvas_reminder('5522', '27201')
         self.assertEqual(0, len(test.get_product_list()))
 
-    def test_same_reminder_no_duplicates(self):
+    def test_same_reminder_no_duplicates_in_list(self):
         test = create_test_db()
         test.new_canvas_reminder('5522', '27201')
         test.new_canvas_reminder('5522', '27201')
