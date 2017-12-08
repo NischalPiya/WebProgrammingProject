@@ -3,7 +3,8 @@ import os
 import time
 
 app= Flask(__name__)
-from Reminders import r,list_courses,list_assignment
+from RemindersApi import list_courses,list_assignment
+from Reminders import r
 from Phone_sms import phone_sms
 canvas_api=os.environ['CANVAS_KEY']
 
@@ -22,8 +23,6 @@ def assignment():
     print()
     list = r.list_reminders()
     return "These are the assignments you currently have reminders for: " + str(list)
-
-
 
 @app.route('/send_sms/<int:set_time>')
 def send_text(set_time):

@@ -1,4 +1,5 @@
-from Reminders import r,list_courses,list_assignment
+from Reminders import r
+from RemindersApi import list_courses,list_assignment
 import time
 
 import time
