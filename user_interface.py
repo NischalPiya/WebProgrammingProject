@@ -61,10 +61,6 @@ while True:
 
                 print("->" + str(r.list_reminders()).strip('[]'))
 
-
-
-
-
         elif user_response=="7":
             break
         else:

@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+ title: Canvas Reminders API
+ description: This is an API that allows the user to set reminders for certain assignments. The user can add and remove reminders, and these reminders will be sent periodically to the user through text messaging.
+ version: "1"
+paths:
+ /courses:
+    get:
+     summary: Lists all assignments for a specified course.
+     description: Gives the user all of the classes they are currently enrolled in. No classes they have previously taken will be listed.The return type is a list of the assignment name, id number, and due date for each assignment in the class.
+     
+     responses:
+       '200':
+         description: All current courses have been listed
+ /assignments/<string:course_code>:
+    get:
+     summary: Lists all assignments for a specified course.
+     description: Gives the user all the assignments for a specified course, which will be specified by a course code parameter. This method prints out all of your assignments along with their assignment id and their 
+       due date.
+       
+     parameters: 
+       - name: course_code
+         in: path
+         required: true
+         description: A string of numbers that represents the course code for the class.
+         schema:
+           type: string
+     responses:
+       '200':
+         description: All assignments for the course that the user requested will be printed out.
+       '401':
+         description: Course id given is for a course that isn't available for the user. 
+       '404':
+          description: Given course_id isn't a valid id.
+ 
+ /add_reminder/<string:course_code>/<string:assign_id>:
+    post:
+     summary: Adds a reminder to the database.
+     description: Given the course code and assignment id, adds a new reminder to the redis database. If a reminder already exists for this assignment, then a new duplicate reminder will not be created.  
+       
+     parameters: 
+       - name: course_code
+         in: path
+         required: true
+         description: A string of 4 numbers that represents the course code for the class.
+         schema:
+           type: string
+       - name: assign_id
+         in: path
+         required: true
+         description: A string of 5 numbers that represents the assignment id for the class.
+         schema:
+           type: string
+     responses:
+       '200':
+         description: Reminder has been successfully added.
+       '401':
+         description: Course id given is for a course that isn't available for the user. 
+       '404':
+          description: Given course_id isn't a valid id.
+ /remove_reminder/<string:course_code>/<string:assign_id>:
+    post:
+     summary: Removes a reminder from the database.
+     description: Given the course code and assignment id, removes an existing reminder from the redis database. If a reminder does not exists for this assignment, then the user will be notified.
+       
+     parameters: 
+       - name: course_code
+         in: path
+         required: true
+         description: A string of 4 numbers that represents the course code for the class.
+         schema:
+           type: string
+       - name: assign_id
+         in: path
+         required: true
+         description: A string of 5 numbers that represents the assignment id for the class.
+         schema:
+           type: string
+     responses:
+       '200':
+         description: Reminder has been successfully removed.
+       '401':
+         description: Course id given is for a course that isn't available for the user. 
+       '404':
+          description: Given course_id isn't a valid id.
+ /list_reminders:
+    get:
+     summary: Lists all assignments that currently have reminders.
+     description: Prints out all the assignments that have reminders. 
+       
+     responses:
+       '200':
+         description: All current reminders have been listed.
+
+ /send_sms<int:set_time>:
+    post:
+     summary: Sends a text with all reminders to the user.
+     description: Sends a list of all reminders in the database to the user through sms text. The set_time parameter allows the user to specify when to send the text message. 
+       
+     parameters: 
+       - name: set_time
+         in: path
+         required: true
+         description: Number of seconds user wants to wait before sending the message of reminders.
+         schema:
+           type: integer
+       
+     responses:
+       '200':
+         description: Text message has been successfully sent.
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/canvas_project/Canvas_Reminders/1

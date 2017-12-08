@@ -13,7 +13,7 @@ app= Flask(__name__)
 
 @app.route('/')
 def index():
-    return "This is your Canvas Reminder"
+    return "Welcome to Canvas Reminder"
 
 @app.route('/courses')
 def course_list():
@@ -66,7 +66,11 @@ def send_text(set_time):
         time.sleep(set_time)
         phone_sms()
         break
+
+
     return("Message has been sent")
+
+
 
 
 if __name__=='__main__':
